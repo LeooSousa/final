@@ -51,26 +51,8 @@ while op != 11:
 
     if op == 9:
         exibir_listas()
-        print(get_total(1))
+        
 
     if op == 10:
         Id_compra = int(input("informe o ID da compra para ver o total: "))
         print(get_total(Id_compra))
-
-
-
-
-
-# fazer a funçao para consultar a compra e depois dar o total de todos os produtos que o cliente quer comprar
-
-# add_compra("2018-05-26")and Id_compra
-# cadastrar("Notebook", 567, "10.22", 1)
-# buscar_por_id(10)
-# buscar_por_descricao('N')
-# listar_produtos()
-# excluir_produto_p_id(1)
-# alterar_preco(10)
-# alterar_descricao(10)
-# exibir_listas()
-
-#ajeitar a parte de alterar preço e inserir as outras
