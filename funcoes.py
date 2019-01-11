@@ -11,7 +11,7 @@ def add_compra(Data):
     cursor.execute(sql)
     if cursor.rowcount == 1:
         conexao.commit()
-        print("Lista", Data, "Criada")
+        print("Lista de compra", Data, "Criada")
     else:
         conexao.rollback()
         print("Nao foi possivel  criar a lista")
