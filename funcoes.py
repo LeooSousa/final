@@ -30,7 +30,7 @@ def get_total(Id_compra):
         return total[0]
 
 
-##########################################################
+
 def exibir_listas():
     '''Exibi as listas'''
     conexao = sqlite3.connect(BD)
@@ -47,8 +47,8 @@ def exibir_listas():
         conexao.close()
 
 
-####################################################
 def listar_produtos(Id_compra):
+    '''Listar todos os produtos de uma compra'''
     conexao = sqlite3.connect(BD)  # sempre preciso criar conexao com o banco
     sql = "SELECT * FROM Produto where Id_compra == '%s'" % Id_compra
     cursor = conexao.cursor()  # pego os codigos roda no bd
@@ -63,8 +63,9 @@ def listar_produtos(Id_compra):
     cursor.close()
     conexao.close()
 
-######################################################################################
+
 def atualiza_total(Id_compra, Valor):
+    '''Atualiza o total'''
     total = get_total(Id_compra) + Valor
     conexao = sqlite3.connect(BD)
     cursor = conexao.cursor()
@@ -79,12 +80,8 @@ def atualiza_total(Id_compra, Valor):
     conexao.close()
 
 
-
-
-######################################################################
-
 def inserir_produto_lista(Descricao, Quantidade, Valor_unitario, Id_compra):
-    '''ojhiugh'''
+    '''Inserir um produto em uma lista de compra'''
     conexao = sqlite3.connect(BD)
     cursor = conexao.cursor()
     sql = ("INSERT INTO Produto (Descricao, Quantidade, Valor_unitario, Id_compra) VALUES ('%s', '%d', '%s', '%d')"
@@ -101,9 +98,8 @@ def inserir_produto_lista(Descricao, Quantidade, Valor_unitario, Id_compra):
     conexao.close()
 
 
-##########################################################################
-
 def buscar_por_id(Id_produto,Id_compra):
+    '''Buscar produto por id'''
     conexao = sqlite3.connect(BD)  # sempre preciso criar conexao com o banco
     cursor = conexao.cursor()  # pego os codigos roda no bd
     sql = "SELECT * FROM Produto WHERE Id_produto='%d' and Id_compra == '%s'" % (Id_produto, Id_compra)
@@ -120,9 +116,8 @@ def buscar_por_id(Id_produto,Id_compra):
     conexao.close()
 
 
-#########################################################################
-
 def excluir_produto_p_id(Id_produto, Id_compra):
+    '''Excluir produto por id'''
     if buscar_por_id(Id_produto, Id_compra):
         resposta = input("Deseja realmente excluir esse produto?").lower()
         if resposta == 's':
@@ -136,10 +131,13 @@ def excluir_produto_p_id(Id_produto, Id_compra):
             else:
                 conexao.rollback()
                 print("Nao foi possivel deletar produto")
+            cursor.close()
+            conexao.close()
 
 
-#########################################################################
+
 def alterar_preco(Id_produto, Id_compra,Valor_unitario):
+    '''Alterar preço'''
     conexao = sqlite3.connect(BD)
     cursor = conexao.cursor()
     sql = "UPDATE Produto SET Valor_unitario='%f' WHERE Id_produto='%d' and Id_compra == '%d'" % (Valor_unitario, Id_produto, Id_compra)
@@ -151,10 +149,13 @@ def alterar_preco(Id_produto, Id_compra,Valor_unitario):
     else:
         conexao.rollback()
         print('Não foi possível alterar produto')
+    cursor.close()
+    conexao.close()
 
 
-##########################################################################
+
 def alterar_descricao(descricao,Id_produto,Id_compra):
+    '''Alterar descrição'''
     conexao = sqlite3.connect(BD)
     cursor = conexao.cursor()
     sql = "UPDATE Produto SET Descricao='%s' WHERE Id_produto= '%d' and Id_compra == '%d'" % (
@@ -166,11 +167,13 @@ def alterar_descricao(descricao,Id_produto,Id_compra):
     else:
         conexao.rollback()
         print('Não foi possível alterar produto')
+    cursor.close()
+    conexao.close()
 
 
-##########################################################################
 
 def buscar_por_descricao(Id_compra,Descricao):
+    '''Buscar por descrição'''
     Descricao = Descricao + '%'
     conexao = sqlite3.connect(BD)
     cursor = conexao.cursor()
